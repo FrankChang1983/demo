@@ -57,5 +57,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  match ':controller(/:action(/:id(.:format)))', :via => :all
+  # 此指令為外部“外卡路由”
 
 end

@@ -1,0 +1,26 @@
+
+
+<h1>Event list</h1>
+<ul>
+
+<% @events.each do |e| %>
+
+  <li>
+     <%= e.name %>
+
+     <%= link_to "SHOW", :controller => "events", :action =>"SHOW",:id => e %>
+
+     <%= link_to "Edit", :controller => "events", :action =>"edit",:id => e %>
+
+     <%= link_to "Delete", :controller => "events", :action =>"destroy",:id => e %>
+  </li>
+
+  <% end %>
+</ul>
+
+
+<%= link_to 'New Event', :controller => 'events', :action => 'new' %>
+<!-- 名為New Event的超連結，
+     跳到controller 的events
+      action是new的頁面     =====>去events controller設定new的動作
+-->

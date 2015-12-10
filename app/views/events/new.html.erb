@@ -1,0 +1,15 @@
+<%= form_for @event, :url => { :controller => 'events', :action => 'create' } do |f| %>
+
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+
+    <%= f.submit "Create" %>
+<% end %>
+
+<!-- 以上會呈現空的Event給使用者
+     rails的helper：form for 會產生一個表單給 ＠event
+     url表示：當按下creat按鈕時會連結到此位置去-->
+<!-- 再回去設定creat頁面所需的動作 -->
