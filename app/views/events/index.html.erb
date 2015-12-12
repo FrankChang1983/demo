@@ -8,18 +8,24 @@
   <li>
      <%= e.name %>
 
-     <%= link_to "SHOW", :controller => "events", :action =>"SHOW",:id => e %>
+     <%= link_to "Show", event_path(e)%>
+     <!-- :controller => "events", :action =>"SHOW",:id => e %> -->
+      <!-- 用RESTful可改成：, event_path(event) %> -->
 
-     <%= link_to "Edit", :controller => "events", :action =>"edit",:id => e %>
-
-     <%= link_to "Delete", :controller => "events", :action =>"destroy",:id => e %>
+     <%= link_to "Edit",edit_event_path(e)%>
+     <!-- :controller => "events", :action =>"edit",:id => e %> -->
+     <!--用RESTful可改成：, edit_event_path(event) %>  -->
+     <%= link_to "Delete", event_path(e), :method => :delete%>
+     <!-- :controller => "events", :action =>"destroy",:id => e %> -->
+      <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm}-->
   </li>
 
   <% end %>
 </ul>
 
 
-<%= link_to 'New Event', :controller => 'events', :action => 'new' %>
+<%= link_to 'New Event', new_event_path%>
+<!-- :controller => 'events', :action => 'new' %> -->
 <!-- 名為New Event的超連結，
      跳到controller 的events
       action是new的頁面     =====>去events controller設定new的動作

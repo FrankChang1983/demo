@@ -1,7 +1,7 @@
 
 
-<%= form_for @event, :url => { :controller => 'events', :action => 'update', :id => @event } do |f| %>
-
+<%= form_for @event, :url => event_path(@event),:method =>:patch do |f| %>
+<!-- { :controller => 'events', :action => 'update', :id => @event } -->
   <%= render :partial => "form", :locals => {:f => f} %>
 
     <%= f.submit "Update" %>

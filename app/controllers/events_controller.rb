@@ -2,7 +2,7 @@
 
 
 
-    before_action :set_event, :only =>[:SHOW, :update, :edit, :destroy]
+    before_action :set_event, :only =>[:show, :update, :edit, :destroy]
 
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
@@ -34,7 +34,7 @@
 
      if @event.save
       flash[:notice] = "新增成功"
-        redirect_to :action => :index
+        redirect_to events_path
         # 輸入表單資料後必須要儲存進資料庫
         # 當輸入資料錯誤時：
         # 告訴瀏覽器http code:303，不希望讓使用者重新整理後又重新送一次表單
@@ -45,7 +45,7 @@
 
    end
 
-   def SHOW
+   def show
        # @event = Event.find(params[:id])
        # show出每個id的events，設定後再安插view的樣版，及html.erb
    end
@@ -65,7 +65,7 @@
 
       flash[:notice] = "編輯成功"
 
-      redirect_to :action => :SHOW, :id => @event
+      redirect_to :action => :show, :id => @event
     else
       render :action => :edit    # edit.html.erb
        #不會重新跳頁，所更新的東西不會消失
