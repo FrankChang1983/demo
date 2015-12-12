@@ -11,7 +11,24 @@
     # 將資料庫所有資料列出來 (all) 或分頁10筆
     # 所有＠的物件變數都會傳到template的樣版上使用
     # 設定完動作完後，到同名的 index.html.erb設定頁面
-   end
+
+    respond_to do |format|
+      format.html  #index.html.erb
+      format.xml {
+        render :xml => @events.to_xml
+      }   #rails內建to_xml將物件event轉成xml字串，不需template
+          # 直接回傳值
+      format.json {
+        render :json => @events.to_json
+      }
+      format.atom {
+        @feed_title = "My event list"
+
+
+      } #atom格式較複雜，需要使用template。(index.atom.builder)template
+      end
+
+    end
 
    # 瀏覽器跑到get /events/new時對跑到這裡來，執行new的動作，
    # 然後回傳 同名為 new的 相關 html 頁面
@@ -46,8 +63,28 @@
    end
 
    def show
+      @page_title = @event.name
        # @event = Event.find(params[:id])
        # show出每個id的events，設定後再安插view的樣版，及html.erb
+
+       respond_to do |format|
+    format.html { @page_title = @event.name } # show.html.erb
+    format.xml # show.xml.builder  (template)
+                #如果沒加{ render :xml => @events.to_xml }
+                #就需要在events裡設template
+    format.json {
+      render :json => { id: @event.id, name: @event.name,
+        foobar: "FOOBAR",
+        created_at: @event.created_at,
+        created_time: @event.created_at
+        }.to_json }
+    end
+    # 若不用上面rails的Json格式，也可利用此 Ruby 自訂格式
+    # 自訂 Hash 比較彈性，rails直接根據資料庫所有的回傳id與name
+    # ruby可自訂訊息如上:多加入字串與時間顯示。可不用與資料庫上的名字一樣
+    # 實際在設計ＡＰＩ時會用自訂Hash的方式。
+    # 接下來再加上超連結的方式讓上面格式可以連到網址
+    # （到index.html 加入連結）
    end
 
 
@@ -65,7 +102,7 @@
 
       flash[:notice] = "編輯成功"
 
-      redirect_to :action => :show, :id => @event
+      redirect_to event_path(@event)
     else
       render :action => :edit    # edit.html.erb
        #不會重新跳頁，所更新的東西不會消失
@@ -80,7 +117,7 @@
 
       flash[:alert] = "刪除成功"
 
-      redirect_to :action => :index
+      redirect_to events_path
    end
 
    private

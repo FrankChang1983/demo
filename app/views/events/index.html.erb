@@ -12,10 +12,14 @@
      <!-- :controller => "events", :action =>"SHOW",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> -->
 
+      <%= link_to "Get XML", event_path(e, :format => :xml)%>
+      <%= link_to "Get Json", event_path(e, :format => :json)%>
+
+
      <%= link_to "Edit",edit_event_path(e)%>
      <!-- :controller => "events", :action =>"edit",:id => e %> -->
      <!--用RESTful可改成：, edit_event_path(event) %>  -->
-     <%= link_to "Delete", event_path(e), :method => :delete%>
+     <%= link_to "Delete", event_path(e), :method => :delete, :data => { :confirm => "Are you sure ?" } %>
      <!-- :controller => "events", :action =>"destroy",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm}-->
   </li>
@@ -31,5 +35,11 @@
       action是new的頁面     =====>去events controller設定new的動作
 -->
 
+
 <%= paginate @events %>
 <!--    分頁10筆 指令 ，另外安裝kaminari套件-->
+
+<%= link_to "Atom feed", events_path(:format => :atom) %>
+
+
+<!-- command line 執行： bin/rake stats : 自動計算寫了多少行的code -->
