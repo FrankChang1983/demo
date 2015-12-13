@@ -65,8 +65,8 @@
    end
 
    def show
-      @page_title = @event.name
-       # @event = Event.find(params[:id])
+      # @page_title = @event.name
+       @event = Event.find(params[:id])
        # show出每個id的events，設定後再安插view的樣版，及html.erb
 
        respond_to do |format|
