@@ -2,8 +2,8 @@
 
 <h1>Event list</h1>
 
-<!-- <%= debug( @events[0] ) %>
-     可在畫面中印出所有資料，或個別資料查看-->
+ <!-- <%= debug( @events[0] ) %> -->
+     <!-- 可在畫面中印出所有資料，或個別資料查看 -->
 
 
 <ul>
@@ -24,7 +24,7 @@
      <%= link_to "Edit",edit_event_path(e)%>
      <!-- :controller => "events", :action =>"edit",:id => e %> -->
      <!--用RESTful可改成：, edit_event_path(event) %>  -->
-     <%= link_to "Delete", event_path(e), :method => :delete, :data => { :confirm => "Are you sure ?" } %>
+     <%= button_to "Delete", event_path(e), :method => :delete, :data => { :confirm => "Are you sure ?" } %>
      <!-- :controller => "events", :action =>"destroy",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm}-->
   </li>

@@ -12,7 +12,7 @@
     # 所有＠的物件變數都會傳到template的樣版上使用
     # 設定完動作完後，到同名的 index.html.erb設定頁面
 
-# Rails.logger.debug("XXXXXXX": + @events.count)
+# Rails.logger.debug("XXXXXXX" + @events.count)
     # 簡單除錯技巧：會顯示在console server裡
 
     respond_to do |format|
@@ -53,7 +53,7 @@
 
      if @event.save
       flash[:notice] = "新增成功"
-        redirect_to events_path
+        redirect_to events_url
         # 輸入表單資料後必須要儲存進資料庫
         # 當輸入資料錯誤時：
         # 告訴瀏覽器http code:303，不希望讓使用者重新整理後又重新送一次表單
@@ -66,11 +66,11 @@
 
    def show
       @page_title = @event.name
-       @event = Event.find(params[:id])
+       # @event = Event.find(params[:id])
        # show出每個id的events，設定後再安插view的樣版，及html.erb
 
        respond_to do |format|
-    format.html { @page_title = @event.name } # show.html.erb
+    format.html { @pagme_title = @event.name } # show.html.erb
     format.xml # show.xml.builder  (template)
                 #如果沒加{ render :xml => @events.to_xml }
                 #就需要在events裡設template
@@ -104,7 +104,7 @@
 
       flash[:notice] = "編輯成功"
 
-      redirect_to event_path(@event)
+      redirect_to event_url(@event)
     else
       render :action => :edit    # edit.html.erb
        #不會重新跳頁，所更新的東西不會消失
@@ -119,7 +119,7 @@
 
       flash[:alert] = "刪除成功"
 
-      redirect_to events_path
+      redirect_to events_url
    end
 
    private
