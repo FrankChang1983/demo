@@ -12,7 +12,8 @@
     # 所有＠的物件變數都會傳到template的樣版上使用
     # 設定完動作完後，到同名的 index.html.erb設定頁面
 
-    Rails.logger.debug("XXXXXXX": + @events.count )
+Rails.logger.debug("XXXXXXX": + @events.count)
+    # 簡單除錯技巧：會顯示在console server裡
 
     respond_to do |format|
       format.html  #index.html.erb
