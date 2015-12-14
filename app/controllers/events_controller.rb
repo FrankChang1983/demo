@@ -70,7 +70,7 @@
        # show出每個id的events，設定後再安插view的樣版，及html.erb
 
        respond_to do |format|
-    format.html { @pagme_title = @event.name } # show.html.erb
+    format.html { @page_title = @event.name } # show.html.erb
     format.xml # show.xml.builder  (template)
                 #如果沒加{ render :xml => @events.to_xml }
                 #就需要在events裡設template
