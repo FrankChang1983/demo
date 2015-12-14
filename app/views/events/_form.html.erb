@@ -10,12 +10,12 @@
 <% end %>
                 <!-- 如果有錯誤訊息，一次列出 -->
 
-<p>
+<div class="form-group">
     <%= f.label :name, "Name" %>
-    <%= f.text_field :name %>
-</p>
+    <%= f.text_field :name, :class => "form-control"   %>
+</div>
 
-<p>
+<div class="form-group">
     <%= f.label :description, "Description" %>
-    <%= f.text_area :description %>
-</p>
+    <%= f.text_area :description, :class => "form-control" %>
+</div>
