@@ -107,7 +107,7 @@
 
       flash[:notice] = "編輯成功"
 
-      redirect_to event_url(:page => params[:page])
+      redirect_to event_url
     else
       render :action => :edit    # edit.html.erb
        #不會重新跳頁，所更新的東西不會消失
