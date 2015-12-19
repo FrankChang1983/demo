@@ -21,6 +21,8 @@
      <!-- :controller => "events", :action =>"SHOW",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> -->
 
+      <%= link_to "Attendee List", event_attendees_path(e),:class => "btn btn-primary" %>
+
       <%= link_to "Get XML", event_path(e, :format => :xml), :class => "btn btn-default"%>
       <%= link_to "Get Json", event_path(e, :format => :json), :class => "btn btn-default"%>
 
