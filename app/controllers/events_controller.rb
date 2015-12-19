@@ -7,7 +7,10 @@
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
    def index
+    # @events = Event.all
+    # = SELECT * FROM events
     @events =Event.page(params[:page]).per(10)
+    # SELECT * FROM events LIMIT 10 OFFSET 10
     # 將資料庫所有資料列出來 (all) 或分頁10筆
     # 所有＠的物件變數都會傳到template的樣版上使用
     # 設定完動作完後，到同名的 index.html.erb設定頁面
@@ -104,7 +107,7 @@
 
       flash[:notice] = "編輯成功"
 
-      redirect_to event_url(@event)
+      redirect_to event_url(:page => params[:page])
     else
       render :action => :edit    # edit.html.erb
        #不會重新跳頁，所更新的東西不會消失
@@ -119,7 +122,10 @@
 
       flash[:alert] = "刪除成功"
 
-      redirect_to events_url
+      redirect_to events_url(:page => params[:page])
+      # events_path == /events
+      # events_path(:page => params[:page]) == /events?page=2
+      # event_path(@event) == /events/123
    end
 
    private

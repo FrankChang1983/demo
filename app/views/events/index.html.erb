@@ -6,7 +6,7 @@
      <!-- 可在畫面中印出所有資料，或個別資料查看 -->
 
 
-<table class="table">
+<tabl e class="table">
 
 <% @events.each do |e| %>
 
@@ -16,7 +16,7 @@
     </td>
 
     <td>
-      <%= link_to "Show", event_path(e), :class => "btn btn-primary" %>
+      <%= link_to "Show", event_path(e),:class => "btn btn-primary" %>
 
      <!-- :controller => "events", :action =>"SHOW",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> -->
@@ -25,10 +25,12 @@
       <%= link_to "Get Json", event_path(e, :format => :json), :class => "btn btn-default"%>
 
 
-      <%= link_to "Edit",edit_event_path(e), :class => "btn btn-default" %>
+      <%= link_to "Edit",edit_event_path(e,:page => params[:page]), :class => "btn btn-default" %>
      <!-- :controller => "events", :action =>"edit",:id => e %> -->
      <!--用RESTful可改成：, edit_event_path(event) %>  -->
-      <%= link_to "Delete", event_path(e), :method => :delete, :data => { :confirm => "Are you sure ?" }, :class => "btn btn-danger" %>
+      <%= link_to "Delete", event_path(e, :page => params[:page]),
+      # /events/123
+      :method => :delete, :data => { :confirm => "Are you sure ?" }, :class => "btn btn-danger" %>
      <!-- :controller => "events", :action =>"destroy",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm}-->
 

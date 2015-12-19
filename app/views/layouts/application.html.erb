@@ -14,11 +14,11 @@
      <% if flash[:notice].present? %>
         <div class="alert alert-success" role="alert"><%= flash[:notice] %>
         </div>
-     <% end %>
+        <% end %>
 
-     <% if flash[:alert].present? %>
+      <% if flash[:alert].present? %>
         <div class="alert alert-danger" role="alert"><%= flash[:alert] %></div>
-    <% end %>
+        <% end %>
 
       <%= yield %>
     </div>
