@@ -7,6 +7,7 @@
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
    def index
+    @event = Event.new
     # @events = Event.all
     # = SELECT * FROM events
     @events =Event.page(params[:page]).per(10)
@@ -136,8 +137,8 @@
   end
 
    def event_params
-    params.require(:event).permit(:name, :description)
-    # 不允許使用者修改除了名字與描述之外的單位
+    params.require(:event).permit(:name, :description, :category_id)
+    # 只允許使用者修改的單位
 
    end
  end

@@ -12,7 +12,35 @@
 
 <div class="form-group">
     <%= f.label :name, "Name" %>
-    <%= f.text_field :name, :class => "form-control"   %>
+    <%= f.text_field :name, :required => true, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+    <%= f.label :category_id, "Category" %>
+   <!-- 跑迴圈抓類別id, 顯示出類別名稱 -->
+    <% Category.all.each do |c| %>
+    <%= f.radio_button :category_id, c.id %> <%= c.name %>
+      <% end %>
+
+    <!-- 下拉式選單有兩種，一種為二維陣列,一種為radio_button -->
+    <%#= f.collection_select :category_id, Category.all, :id, :name, :class => "form-control", :include_blank => "Please select" %>
+    <!-- 不讓選單空白方法二：prompt ,只會提醒一次 -->
+    <!-- 另一種寫法 -->
+    <%#= f.select :category_id, Category.all.map{ |x| [ x.name, x.id] }, :class => "form-control" %>
+    <!-- 二維陣列，下拉選單，[["Foo", 1],["Bar", 2]]
+         第一個選單為Foo,第二個為Bar
+         實際上二維陣列是從category的model裡撈資料出來
+         在console裡執行 -->
+</div>
+
+<div class="form-group">
+  <%= f.label :start_on, "開始日期" %>
+  <%= f.date_select :start_on, :required => true, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :schedule_at, "預約時間" %>
+  <%= f.datetime_select :schedule_at, :required => true, :class => "form-control" %>
 </div>
 
 <div class="form-group">
