@@ -2,9 +2,16 @@
 
 <h1>Event list</h1>
 
- <!-- <%= debug( @events[0] ) %> -->
+ <!-- debug( @ events[ ] )  -->
      <!-- 可在畫面中印出所有資料，或個別資料查看 -->
 
+<%= form_for @event do |f| %>
+<%= render :partial => "form", :locals => { :f => f} %>
+<%= f.submit "Save", :class => "btn btn-primary" %>
+<%= link_to "Cancel", events_path, :class => "btn btn-default" %>
+<% end %>
+
+<hr>
 
 <table class="table">
 
@@ -29,12 +36,12 @@
 
       <%= link_to "Edit",edit_event_path(e,:page => params[:page]), :class => "btn btn-default" %>
      <!-- :controller => "events", :action =>"edit",:id => e %> -->
-     <!--用RESTful可改成：, edit_event_path(event) %>  -->
+     <!-- 用RESTful可改成：, edit_event_path(event) %> -->
       <%= link_to "Delete", event_path(e, :page => params[:page]),
       # /events/123
       :method => :delete, :data => { :confirm => "Are you sure ?" }, :class => "btn btn-danger" %>
-     <!-- :controller => "events", :action =>"destroy",:id => e %> -->
-      <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm}-->
+      <!-- :controller => "events", :action =>"destroy",:id => e %>  -->
+      <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm} -->
 
     </td>
   </tr>
@@ -43,9 +50,10 @@
 </table>
 
 
+
 <%= link_to 'New Event', new_event_path%>
-<!-- :controller => 'events', :action => 'new' %> -->
-<!-- 名為New Event的超連結，
+<!-- :controller => 'events', :action => 'new' %>
+ 名為New Event的超連結，
      跳到controller 的events
       action是new的頁面     =====>去events controller設定new的動作
 -->
