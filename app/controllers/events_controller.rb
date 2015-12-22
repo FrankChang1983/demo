@@ -1,6 +1,7 @@
  class EventsController < ApplicationController
 
-
+    before_action :authenticate_user!, :except => [:index]
+    # 代表以下controller的動作都要登入,可設定only,except
 
     before_action :set_event, :only =>[:show, :update, :edit, :destroy, :dashboard]
 
@@ -104,6 +105,7 @@
       redirect_to :back
    end
 
+# GET/events/:id/dashboard
    def dashboard
 
    end
