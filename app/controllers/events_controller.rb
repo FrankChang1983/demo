@@ -2,7 +2,7 @@
 
 
 
-    before_action :set_event, :only =>[:show, :update, :edit, :destroy]
+    before_action :set_event, :only =>[:show, :update, :edit, :destroy, :dashboard]
 
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
@@ -102,6 +102,10 @@
       end
 
       redirect_to :back
+   end
+
+   def dashboard
+
    end
 
    def show
