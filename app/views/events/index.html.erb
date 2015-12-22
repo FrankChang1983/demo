@@ -22,14 +22,19 @@
 <%= form_tag bulk_update_events_path do %>
 <!-- 用form把整個表單資料包起來 -->
 
-<table class="table">
+<table class="table table-hover">
 
 <% @events.each do |e| %>
 
-  <tr>
+  <tr class="info-hover">
     <td>
      <%= check_box_tag "ids[]", e.id, false %>
      <%= e.name %>
+    </td>
+
+    <td>
+      <%= e.user.try(:short_name)  %>
+      <!-- user model裡定義，取mail前面名稱 -->
     </td>
 
     <td>

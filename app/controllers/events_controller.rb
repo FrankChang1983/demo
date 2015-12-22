@@ -64,6 +64,9 @@
       # 此處基於網路安全，需另外設定require, permit將hash
       # 過濾出params[:event][:name]和[:event][:description]
       # 此機制稱為： strong parameter
+      @event.user = current_user
+      # 建立使用者關聯，可知道event是哪個user創立
+      # index的 e.user
 
      if @event.save
       flash[:notice] = "新增成功"

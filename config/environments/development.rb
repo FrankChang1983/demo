@@ -38,4 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # devise 套件, email認證設定檔： 絕對網址localhost，
+  # 註冊成功信，忘記密碼email取得
 end
