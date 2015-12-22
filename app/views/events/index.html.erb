@@ -13,6 +13,11 @@
 <% end %>
 
 <hr>
+<!-- 關鍵字搜尋框，tag預設是post,所以要設定為get -->
+<%= form_tag events_path, :method => :get do %>
+  <%= text_field_tag "keyword" %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <%= form_tag bulk_update_events_path do %>
 <!-- 用form把整個表單資料包起來 -->
