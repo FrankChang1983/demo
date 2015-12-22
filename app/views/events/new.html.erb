@@ -1,9 +1,12 @@
 <%= form_for @event, :url => events_path do |f| %>
+<%= form_for setup_event(@event), :url => events_path do |f| %>
 <!-- { :controller => 'events', :action => 'create' }  -->
     <%= render :partial => "form", :locals => {:f => f} %>
 
     <%= f.submit "Create", :class => "btn btn-success" %>
 <% end %>
+<% end %>
+
 
 <!-- 以上會呈現空的Event給使用者
      rails的helper：form for 會產生一個表單給 ＠event

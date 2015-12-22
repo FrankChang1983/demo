@@ -2,6 +2,7 @@
 
 <h1>Event list</h1>
 
+<p><%= link_to "Latest events", latest_events_path %></p>
  <!-- debug( @ events[ ] )  -->
      <!-- 可在畫面中印出所有資料，或個別資料查看 -->
 
@@ -13,12 +14,16 @@
 
 <hr>
 
+<%= form_tag bulk_update_events_path do %>
+<!-- 用form把整個表單資料包起來 -->
+
 <table class="table">
 
 <% @events.each do |e| %>
 
   <tr>
     <td>
+     <%= check_box_tag "ids[]", e.id, false %>
      <%= e.name %>
     </td>
 
@@ -27,6 +32,7 @@
 
      <!-- :controller => "events", :action =>"SHOW",:id => e %> -->
       <!-- 用RESTful可改成：, event_path(event) %> -->
+      <%#= link_to 'Location', event_location_path(e),:class => "btn btn-default" %>
 
       <%= link_to "Attendee List", event_attendees_path(e),:class => "btn btn-primary" %>
 
@@ -34,7 +40,7 @@
       <%= link_to "Get Json", event_path(e, :format => :json), :class => "btn btn-default"%>
 
 
-      <%= link_to "Edit",edit_event_path(e,:page => params[:page]), :class => "btn btn-default" %>
+      <%= link_to "Edit", events_path(eid: e.id), :class => "btn btn-default" %>
      <!-- :controller => "events", :action =>"edit",:id => e %> -->
      <!-- 用RESTful可改成：, edit_event_path(event) %> -->
       <%= link_to "Delete", event_path(e, :page => params[:page]),
@@ -49,6 +55,12 @@
   <% end %>
 </table>
 
+    <%= submit_tag "Delete" %>
+    <%= submit_tag "Publish" %>
+
+<% end %>
+
+<%#= <button_to "Delete All", bulk_delete_events_path %>
 
 
 <%= link_to 'New Event', new_event_path%>

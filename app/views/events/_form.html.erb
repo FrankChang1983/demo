@@ -16,6 +16,11 @@
 </div>
 
 <div class="form-group">
+    <%= f.label :status, "Name" %>
+    <%= f.select :status, [["Published", "published"],["Draft", "draft"]]%>
+</div>
+
+<div class="form-group">
     <%= f.label :category_id, "Category" %>
    <!-- 跑迴圈抓類別id, 顯示出類別名稱 -->
     <% Category.all.each do |c| %>
@@ -34,6 +39,11 @@
 </div>
 
 <div class="form-group">
+   <%= f.collection_check_boxes(:group_ids, Group.all, :id, :name) %>
+<!-- helper提供的方法，hash裡的格式為規定，查閱helper的方法 -->
+</div>
+
+<div class="form-group">
   <%= f.label :start_on, "開始日期" %>
   <%= f.date_select :start_on, :required => true, :class => "form-control" %>
 </div>
@@ -46,4 +56,18 @@
 <div class="form-group">
     <%= f.label :description, "Description" %>
     <%= f.text_area :description, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.fields_for :location do |location_form| %>
+<p>
+<%= location_form.label :name, "Location Name" %>
+<%= location_form.text_field :name %>
+
+<% unless location_form.object.new_record? %>
+    <%= location_form.label :_destroy, 'Remove:' %>
+    <%= location_form.check_box :_destroy %>
+<% end %>
+</p>
+<% end %>
 </div>

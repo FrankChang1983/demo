@@ -2,7 +2,10 @@
 
 <%= form_for @event, :url => event_path(@event),:method =>:patch do |f| %>
 <!-- { :controller => 'events', :action => 'update', :id => @event } -->
+<%= form_for setup_event(@event), :url => event_path(@event), :method => :put do |f| %>
+
   <%= render :partial => "form", :locals => {:f => f} %>
 
     <%= f.submit "Update", :class => "btn btn-primary" %>
+<% end %>
 <% end %>

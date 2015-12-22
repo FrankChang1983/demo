@@ -1,6 +1,18 @@
 <h2><%= @event.name%></h2>
 
+<p><%= @event.status %></p>
+
+<ul>
+<% @event.groups.each do |g| %>
+   <li><%= g.name %></li>
+<% end %>
+</ul>
+
+<p><%= @event.category_name %></p>
+
     <%= simple_format(@event.description)%>
+    <%#= @event.location.name %>
+
 
 <% if false %>
  <!-- helper:simple_format 可將表單換行的文字自動加br斷行

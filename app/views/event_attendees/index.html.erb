@@ -8,15 +8,18 @@
 
      <td>
        <%= a.name %>
+    </td>
+    <td>
        <%= link_to "Show", event_attendee_path(@event, a), :class => "btn btn-primary"%>
        <%= link_to "Edit", edit_event_attendee_path(@event, a), :class => "btn btn-primary"%>
        <%= link_to "Delete", event_attendee_path(@event, a), :method=> :delete, :data => {:confirm => "Are You Sure??"}, :class => "btn btn-danger"%>
-     </td>
+    </td>
 
-     <% end %>
    </tr>
+   <% end %>
 </table>
 
+<hr>
  <%= link_to "New Attendee", new_event_attendee_path(@event), :class => "btn btn-primary"%>
 
 

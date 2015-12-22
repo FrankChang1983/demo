@@ -1,6 +1,15 @@
 <h2> <%= @event.name%> </h2>
+
+<ul>
+  <% @event.groups.each do |g| %>
+   <li><%= g.name %></li>
+  <% end %>
+</ul>
+
+  <!-- collection checkbox,把每個groups的名字印出來 -->
+
   <p>
-    <%= @category.name %>
+    <%= @event.category.name %>
   </p>
 
   <p>

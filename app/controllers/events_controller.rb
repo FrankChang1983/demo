@@ -7,10 +7,19 @@
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
    def index
-    @event = Event.new
+
+    if params[:eid]
+      @event =Event.find(params[:eid])
+    else
+      @event = Event.new
+      # @event.start_on = Date.new(2015,1,1) #assign a default date
+    end
+
+    prepare_variable_for_index_template
+
     # @events = Event.all
     # = SELECT * FROM events
-    @events =Event.page(params[:page]).per(10)
+    # @events =Event.page(params[:page]).per(10)
     # SELECT * FROM events LIMIT 10 OFFSET 10
     # 將資料庫所有資料列出來 (all) 或分頁10筆
     # 所有＠的物件變數都會傳到template的樣版上使用
@@ -61,11 +70,38 @@
         # 輸入表單資料後必須要儲存進資料庫
         # 當輸入資料錯誤時：
         # 告訴瀏覽器http code:303，不希望讓使用者重新整理後又重新送一次表單
+    else
+    prepare_variable_for_index_template
 
-    else render :action => :new    # new.html..erb
+    render :action => :index   # new.html..erb
         # 當輸入沒填滿則顯示警告視窗
       end
 
+   end
+
+ # 首頁新增其它頁面，如最新消息，在event下新增路由
+   def latest
+     @event = Event.order("id DESC").limit(3)
+   end
+
+  # POST/events/bulk_delete
+   # def bulk_delete
+      # Event.destroy_all----刪除全部資料
+      # redirect_to :back
+   def bulk_update
+    # 用陣列包起來：為了空值nil時，送出會轉為空陣列，不是空值
+    ids = Array( params[:ids] )
+    # find_by：如果有不存在的id,則會回傳空值...find(i)會丟出例外
+    # compact則會把陣列裡的nil去除
+    events = ids.map{ |i| Event.find_by_id(i) }.compact
+
+      if params[:commit] == "Delete"
+        events.each { |e| e.destroy }
+      elsif [:commit] == "Publish"
+        events.each { |e| e.update( :status => "Published") }
+      end
+
+      redirect_to :back
    end
 
    def show
@@ -137,9 +173,12 @@
   end
 
    def event_params
-    params.require(:event).permit(:name, :description, :category_id)
-    # 只允許使用者修改的單位
+    params.require(:event).permit(:name, :status, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
+    # 只允許使用者修改的單位, group_ids為陣列形式，所以可以複選
+   end
 
+   def prepare_variable_for_index_template
+      @events =Event.page(params[:page]).per(5)
    end
  end
 
