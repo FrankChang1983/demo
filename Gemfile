@@ -15,6 +15,10 @@ gem 'kaminari'
 
 gem 'devise'
 
+gem "paperclip"
+
+# gem 'faker'
+
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'pg'

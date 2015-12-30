@@ -1,16 +1,19 @@
 
 
-<h1>Event list</h1>
+<div class="container" style="background: grey">
+<h1 style="color: brown">Step-Out Activicities </h1>
 
+<img src="http://placehold.it/940x150" alt="">
 <p><%= link_to "Latest events", latest_events_path %></p>
  <!-- debug( @ events[ ] )  -->
      <!-- 可在畫面中印出所有資料，或個別資料查看 -->
 
 <%= form_for @event do |f| %>
 <%= render :partial => "form", :locals => { :f => f} %>
-<%= f.submit "Save", :class => "btn btn-primary" %>
+<%= f.submit "更新", :class => "btn btn-primary" %>
 <%= link_to "Cancel", events_path, :class => "btn btn-default" %>
 <% end %>
+
 
 <hr>
 <!-- 關鍵字搜尋框，tag預設是post,所以要設定為get -->
@@ -22,7 +25,12 @@
 <%= form_tag bulk_update_events_path do %>
 <!-- 用form把整個表單資料包起來 -->
 
-<table class="table table-hover">
+<%= link_to 'Sort by Name', events_path( :order => "name") %>
+<%= link_to 'Sort by Default', events_path %>
+<!-- 按條件排序 -->
+
+
+<table class="table">
 
 <% @events.each do |e| %>
 
@@ -67,7 +75,7 @@
   <% end %>
 </table>
 
-    <%= submit_tag "Delete" %>
+    <%= submit_tag "Delete", :class => "btn btn-danger" %>
     <%= submit_tag "Publish" %>
 
 <% end %>
@@ -88,5 +96,5 @@
 
 <%= link_to "Atom feed", events_path(:format => :atom) %>
 
-
+</div>
 <!-- command line 執行： bin/rake stats : 自動計算寫了多少行的code -->

@@ -8,6 +8,7 @@
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
    def index
+    # index的edit連結導到首頁表格裡
 
     if params[:eid]
       @event =Event.find(params[:eid])
@@ -101,8 +102,10 @@
 
       if params[:commit] == "Delete"
         events.each { |e| e.destroy }
+        flash[:alert] = "刪除成功"
       elsif [:commit] == "Publish"
         events.each { |e| e.update( :status => "Published") }
+        flash[:notice] = "編輯成功"
       end
 
       redirect_to :back
@@ -153,7 +156,7 @@
 
       flash[:notice] = "編輯成功"
 
-      redirect_to event_url
+      redirect_to :back
     else
       render :action => :edit    # edit.html.erb
        #不會重新跳頁，所更新的東西不會消失
@@ -182,12 +185,27 @@
   end
 
    def event_params
-    params.require(:event).permit(:name, :status, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
+    params.require(:event).permit(:name, :status, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy], :photo)
     # 只允許使用者修改的單位, group_ids為陣列形式，所以可以複選
    end
 
    def prepare_variable_for_index_template
-      @events =Event.page(params[:page]).per(5)
+
+      if params[:keyword]
+        @events = Event.where(["name like ?", "%#{params[:keyword]}%" ] )
+        # keyword模糊搜尋
+      else
+        @events = Event.all
+      end
+
+      if params[:order]
+        sort_by = (params[:order] == 'name')? 'name' : 'id'
+        @events = @events.order(sort_by)
+        # 須先判斷params條件是正確的才傳出實例變數排序，直接丟params
+        # 會有安全性問題
+      end
+      @events =@events.page(params[:page]).per(5)
+      # 資料庫的查詢可以串接！ 過濾與不過慮，再進行資料分頁
    end
  end
 
