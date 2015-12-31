@@ -185,7 +185,7 @@
   end
 
    def event_params
-    params.require(:event).permit(:name, :status, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy], :photo)
+    params.require(:event).permit(:name, :status, :phote, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
     # 只允許使用者修改的單位, group_ids為陣列形式，所以可以複選
    end
 
