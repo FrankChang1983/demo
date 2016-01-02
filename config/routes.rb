@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "/about" => "events#about"
+
+  resources :users
+
   resources :events do
     resources :attendees, :controller => "event_attendees"
    # resource :location, :controller => "events"
@@ -19,7 +23,8 @@ end
   resources :people
   get "welcome/say_hello" => "welcome#say"
   get "welcome" => "welcome#index"
-  root :to => "events#index"
+
+  root "events#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

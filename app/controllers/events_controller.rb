@@ -5,6 +5,10 @@
 
     before_action :set_event, :only =>[:show, :update, :edit, :destroy, :dashboard]
 
+    def about
+
+    end
+
  #  GET/events/index
  #  GET/events       當瀏覽器進到兩種，則進到index的action
    def index
@@ -185,7 +189,7 @@
   end
 
    def event_params
-    params.require(:event).permit(:name, :status, :phote, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
+    params.require(:event).permit(:name, :status, :photo, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
     # 只允許使用者修改的單位, group_ids為陣列形式，所以可以複選
    end
 
