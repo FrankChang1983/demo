@@ -1,0 +1,16 @@
+<table class="table">
+  <tr>
+    <th>活動名稱：</th>
+    <th>活動發起人</th>
+    <th>建立時間</th>
+  </tr>
+  <% events.each do |e|%>
+  <tr>
+    <td><%= e.name %></td>
+    <td><%= e.user.display_name %></td>
+    <td><%= e.created_at.to_s(:short)%></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= paginate events %>

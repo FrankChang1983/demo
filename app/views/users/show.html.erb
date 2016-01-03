@@ -1,0 +1,6 @@
+<h1> <%= @user.display_name %></h1>
+
+<%= render :partial => "events/list", :locals => {:events => @events}%>
+<hr>
+<%= link_to "Back to Index", events_path %>
+

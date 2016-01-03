@@ -9,8 +9,10 @@ class User < ActiveRecord::Base
 
     def short_name
       self.email.split("@").first
-
     end
 
+    def display_name
+      first_name || last_name || short_name || email
+    end
 end
 
