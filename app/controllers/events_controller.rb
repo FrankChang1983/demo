@@ -51,6 +51,18 @@
 
     end
 
+    def subscribe
+      @event = Event.find(params[:id])
+      @event.subscriptions.create!( :user => current_user )
+      redirect_to :back
+    end
+
+    def unsubscribe
+      @event = Event.find(params[:id])
+      current_user.subscriptions.where( :event_id => @event.id ).destroy_all
+      redirect_to :back
+    end
+
    # 瀏覽器跑到get /events/new時對跑到這裡來，執行new的動作，
    # 然後回傳 同名為 new的 相關 html 頁面
    def new
@@ -122,7 +134,7 @@
 
    def show
       # @page_title = @event.name
-       @event = Event.find(params[:id])
+       # @event = Event.find(params[:id])
        # show出每個id的events，設定後再安插view的樣版，及html.erb
 
        respond_to do |format|
@@ -189,7 +201,7 @@
   end
 
    def event_params
-    params.require(:event).permit(:name, :status, :photo, :description, :category_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
+    params.require(:event).permit(:name, :status, :photo, :description, :category_id, :user_id, :group_ids => [], :location_attributes => [:id, :name, :_destroy])
     # 只允許使用者修改的單位, group_ids為陣列形式，所以可以複選
    end
 

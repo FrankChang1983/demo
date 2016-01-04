@@ -9,16 +9,26 @@ Rails.application.routes.draw do
   resources :events do
     resources :attendees, :controller => "event_attendees"
    # resource :location, :controller => "events"
-   collection do
+    resources :likes
+
+    collection do
     get :latest
     post :bulk_update
-   end
+    end
 
-   member do
+    member do
+    post :subscribe
+    post :unsubscribe
+    end
+
+    member do
     get :dashboard
-   end
-end
+    end
+  end
 
+  namespace :admin do
+    resources :events
+  end
 
   resources :people
   get "welcome/say_hello" => "welcome#say"

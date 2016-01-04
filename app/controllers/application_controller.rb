@@ -16,4 +16,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) << :last_name
 
     end
+    def set_events
+      @event = Event.find(params[:event_id])
+    end
 end
