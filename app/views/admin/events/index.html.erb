@@ -1,1 +1,77 @@
 管理者頁面
+
+
+<hr>
+<!-- 關鍵字搜尋框，tag預設是post,所以要設定為get -->
+<%= form_tag events_path, :method => :get do %>
+  <%= text_field_tag "keyword" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<%= form_tag bulk_update_events_path do %>
+<!-- 用form把整個表單資料包起來 -->
+
+<%= link_to 'Sort by Name', events_path( :order => "name") %>
+<%= link_to 'Sort by Default', events_path %>
+<table class="table">
+  <tr>
+    <th>活動名稱：</th>
+    <th>發起人：</th>
+    <th>活動詳情</th>
+    <th></th>
+    <th>報名名單：</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @events.each do |e| %>
+
+  <tr class="info-hover">
+    <td>
+     <%= check_box_tag "ids[]", e.id, false %>
+     <%= e.name %>
+    </td>
+
+    <td>
+      <%= link_to e.user.display_name, user_path(e.user) %>
+      <!-- user model裡定義，取mail前面名稱 -->
+    </td>
+
+    <td>
+      <%= link_to "Show", event_path(e),:class => "btn btn-primary" %>
+    </td>
+     <!-- :controller => "events", :action =>"SHOW",:id => e %> -->
+      <!-- 用RESTful可改成：, event_path(event) %> -->
+      <%#= link_to 'Location', event_location_path(e),:class => "btn btn-default" %>
+
+    <td>
+      <%= link_to "Dashboard", dashboard_event_path(e),:class => "btn btn-primary" %>
+    </td>
+    <td>
+      <%= link_to "Attendee List", event_attendees_path(e),:class => "btn btn-primary" %>
+    </td>
+    <td>
+      <%= link_to "Get XML", event_path(e, :format => :xml), :class => "btn btn-default"%>
+      <%= link_to "Get Json", event_path(e, :format => :json), :class => "btn btn-default"%>
+
+
+      <%= link_to "Edit", events_path(eid: e.id), :class => "btn btn-default" %>
+     <!-- :controller => "events", :action =>"edit",:id => e %> -->
+     <!-- 用RESTful可改成：, edit_event_path(event) %> -->
+      <%= link_to "Delete", event_path(e, :page => params[:page]),
+      # /events/123
+      :method => :delete, :data => { :confirm => "Are you sure ?" }, :class => "btn btn-danger" %>
+      <!-- :controller => "events", :action =>"destroy",:id => e %>  -->
+      <!-- 用RESTful可改成：, event_path(event) %> ,:method => :delete, :data => {confirm} -->
+
+    </td>
+  </tr>
+
+  <% end %>
+</table>
+
+    <%= submit_tag "Delete", :class => "btn btn-danger" %>
+    <%= submit_tag "Publish" %>
+
+<% end %>

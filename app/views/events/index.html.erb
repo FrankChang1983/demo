@@ -1,14 +1,19 @@
 
 
 <div class="container" style="background: grey">
-<h1 style="color: brown">Step-Out Activicities </h1>
-
+<h1 style="color: brown">Step-Out Activicities
+<figure>
 <img src="http://placehold.it/940x150" alt="">
+  <figcaption>
+
+  </figcaption>
+</figure>
+</h1>
 <p><%= link_to "Latest events", latest_events_path %></p>
  <!-- debug( @ events[ ] )  -->
      <!-- 可在畫面中印出所有資料，或個別資料查看 -->
 
-<%= form_for @event do |f| %>
+<%= form_for(@event, html:{ multipart: true }) do |f| %>
 <%= render :partial => "form", :locals => { :f => f} %>
 <%= f.submit "更新", :class => "btn btn-primary" %>
 <%= link_to "Cancel", events_path, :class => "btn btn-default" %>
@@ -18,8 +23,8 @@
 <hr>
 <!-- 關鍵字搜尋框，tag預設是post,所以要設定為get -->
 <%= form_tag events_path, :method => :get do %>
-  <%= text_field_tag "keyword" %>
-  <%= submit_tag "Search" %>
+  <%= text_field_tag "keyword"%>
+  <%= submit_tag "Search", :class => "fa fa-search" %>
 <% end %>
 
 <%= form_tag bulk_update_events_path do %>
@@ -103,6 +108,7 @@
       action是new的頁面     =====>去events controller設定new的動作
 -->
 
+<%#= render :partial => "list", :locals => {:events => @events}%>
 
 <%= paginate @events %>
 <!--    分頁10筆 指令 ，另外安裝kaminari套件-->

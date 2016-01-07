@@ -1,4 +1,4 @@
- class EventsController < ApplicationController
+class EventsController < ApplicationController
 
     before_action :authenticate_user!, :except => [:index]
     # 代表以下controller的動作都要登入,可設定only,except

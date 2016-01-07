@@ -4,7 +4,7 @@
     <th>活動發起人</th>
     <th>建立時間</th>
   </tr>
-  <% events.each do |e|%>
+  <% @events.each do |e|%>
   <tr>
     <td><%= e.name %></td>
     <td><%= e.user.display_name %></td>
